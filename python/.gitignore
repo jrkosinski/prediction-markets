@@ -9,6 +9,11 @@ __pycache__/
 # C extensions
 *.so
 
+# jupyter
+share/
+bin/
+etc/
+
 # Distribution / packaging
 .Python
 build/
@@ -18,6 +23,7 @@ downloads/
 eggs/
 .eggs/
 lib/
+lib64
 lib64/
 parts/
 sdist/
