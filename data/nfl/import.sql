@@ -1,4 +1,6 @@
 select * from games;
+select count(*) from games;
+select count(*) from games where final_home_score is not null;
 select * from plays;
 
 --delete from games where id is not null;
@@ -12,6 +14,9 @@ select * from plays where game_id like '2006%';
 
 select * from plays where game_id='2006_18_DAL_SEA'  order by game_seconds_remaining;
 
+
+ALTER TABLE games add column final_home_score smallint;
+ALTER TABLE games add column final_away_score smallint;
 
 
 DO $$
@@ -55,6 +60,8 @@ BEGIN
 
         IF (final_home is not null and final_away is not null) THEN
             RAISE NOTICE 'Game ID: %, total_home: %, total_away: %', game_rec.id, final_home, final_away;
+
+            update games set final_home_score=final_home, final_away_score=final_away where id=game_rec.id;
 
             -- who's in the lead?
             if (interim_home > interim_away) then
